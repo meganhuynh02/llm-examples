@@ -20,9 +20,9 @@ if prompt := st.chat_input():
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
 
-    picture = st.camera_input("Take a picture of the ingredients you have")
-    if picture:
-        st.image(picture)
+    #picture = st.camera_input("Take a picture of the ingredients you have")
+    #if picture:
+        #st.image(picture)
     
     uploaded_file = st.file_uploader("Or use an existing image")
 
