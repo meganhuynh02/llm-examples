@@ -1,16 +1,26 @@
 import streamlit as st
 from openai import OpenAI
 
+# create website sidebar
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
     "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
 
+#create page title
 st.title(":cook: Ingredients to Recipes")
-uploaded_file = st.file_uploader("Upload a picture of your ingredients")
 
-picture = st.camera_input("Or take a picture of the ingredients you have")
+#create page caption
+st.caption("🚀 A streamlit chatbot powered by OpenAI LLM")
+
+#default on screen message
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "What should we cook today? :yum:"}]
+
+picture = st.camera_input("Take a picture of the ingredients you have")
 if picture:
     st.image(picture)
+
+uploaded_file = st.file_uploader("Or upload an existing picture")
 
 if uploaded_file and not openai_api_key:
     st.info("Please add your OpenAI API key to continue.")
