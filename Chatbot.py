@@ -22,9 +22,9 @@ if prompt := st.chat_input():
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
 
-    #picture = st.camera_input("Take a picture of the ingredients you have")
-    #if picture:
-        #st.image(picture)
+    picture = st.camera_input("Take a picture of the ingredients you have")
+    if picture:
+        st.image(picture)
 
 
     client = OpenAI(api_key=openai_api_key)
@@ -34,10 +34,3 @@ if prompt := st.chat_input():
     msg = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": msg})
     st.chat_message("assistant").write(msg)
-
-    uploaded_file = st.file_uploader("Upload an article")
-    question = st.text_input(
-        "Ask something about the article",
-        placeholder="Can you give me a short summary?",
-        disabled=not uploaded_file,
-)
