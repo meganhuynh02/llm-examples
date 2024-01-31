@@ -10,7 +10,7 @@ with st.sidebar:
 st.title(":cook: Ingredients to Recipes")
 
 #create page caption
-st.caption("🚀 A streamlit chatbot powered by OpenAI LLM")
+st.caption(":shallow_pan_of_food: A cooking assistant powered by OpenAI LLM")
 
 #default on screen message
 if "messages" not in st.session_state:
