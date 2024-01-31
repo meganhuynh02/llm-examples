@@ -1,6 +1,7 @@
 from openai import OpenAI
 import streamlit as st
 from io import StringIO
+import pandas as pd
 
 with st.sidebar:
     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
@@ -25,23 +26,12 @@ if prompt := st.chat_input():
     #if picture:
         #st.image(picture)
     
-    uploaded_file = st.file_uploader("Choose a file")
-    if uploaded_file is not None:
-        # To read file as bytes:
-        bytes_data = uploaded_file.getvalue()
-        st.write(bytes_data)
-
-        # To convert to a string based IO:
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-        st.write(stringio)
-
-        # To read file as string:
-        string_data = stringio.read()
-        st.write(string_data)
-
-        # Can be used wherever a "file-like" object is accepted:
-        dataframe = pd.read_csv(uploaded_file)
-        st.write(dataframe)
+    uploaded_file = st.file_uploader("Upload an article")
+    question = st.text_input(
+        "Ask something about the article",
+        placeholder="Can you give me a short summary?",
+        disabled=not uploaded_file,
+)
 
     client = OpenAI(api_key=openai_api_key)
     st.session_state.messages.append({"role": "user", "content": prompt})
