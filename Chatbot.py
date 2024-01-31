@@ -26,7 +26,6 @@ if prompt := st.chat_input():
     if picture:
         st.image(picture)
 
-
     client = OpenAI(api_key=openai_api_key)
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
